@@ -1,0 +1,43 @@
+.Container{
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+    
+   
+}
+
+.Item{
+    background-image: url(showphoto.jpeg);
+    width: 1500px;
+
+    }
+
+
+.contents1{
+    background-color: rgb(94, 94, 94);
+    padding: 60px;
+    
+}
+
+.Text1{
+    color: rgb(255, 255, 255);
+    text-align: justify;
+    h2{font-size:25px;}
+    .本文1{font-size: 15px;}
+    text-align: left;
+}
+
+.contents2{
+    background-color: rgb(202, 202, 202);
+    padding: 60px;
+
+}
+
+
+
+.Text2{
+    color: rgb(94, 94, 94);
+    text-align: justify;
+    h2{font-size:25px;}
+    .本文1{font-size: 15px;}
+}

@@ -1,0 +1,11 @@
+<%= form_for @tweet do |f| %>
+  <%= f.label :キャプション %>
+  <%= f.text_field :comment, :size => "30x2" %>
+
+<p><div class="tag_edit"></p>
+  <%= f.label :タグ %>
+  <%= f.text_field :tag_list, value: @tweet.tag_list %>  
+  </div>
+
+  <p><%= f.submit "完了" %></p>
+<% end %>

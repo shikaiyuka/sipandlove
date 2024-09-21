@@ -1,0 +1,47 @@
+<h1>Name : <%= @user.name %></h1>
+<p>プロフィール : <%= @user.profile %></p>
+
+<% if current_user.id == @user.id %>
+  <%= link_to "編集する", edit_user_registration_path %>
+<% end %>
+
+<h2>ユーザーの投稿一覧</h2>
+<div class="tweets-container">
+   <% @user.tweets.each do |t| %>
+    <div class="tweet">
+    <p><%= t.user.name %></p>
+    <% if t.image.attached? %>
+      <p><%= image_tag t.image, class: '一覧画像'%></p>
+    <% end %>
+    <div class="一覧カクテル名">
+    <p><%= t.cocktail %></p>
+    </div>
+    <p><%= t.Base %></p>
+    <p><%= t.comment %></p>
+    <%= render 'tweets/tag_list', tag_list: t.tag_list %>
+    
+    <% if user_signed_in? %>
+        <% if current_user.already_liked?(t) %>
+            <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
+                <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+            <% end %>
+        <% else %>
+            <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
+                <i class="fa-regular fa-heart"></i><%= t.likes.count %>
+            <% end %>
+        <% end %>
+      <% else %>
+          <i class="fa-regular fa-heart"></i> <%= t.likes.count %>
+      <% end %>
+
+      <%= t.created_at.to_s(:datetime_jp) %>
+      <% if user_signed_in? && current_user.id == t.user_id %>
+      <%= link_to "編集する", edit_tweet_path(t.id) %>
+      <%= button_to "削除する", tweet_path(t.id), method: :delete %> 
+    <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+<p><%= link_to "みんなのCocktails一覧へ", tweets_path %></p>

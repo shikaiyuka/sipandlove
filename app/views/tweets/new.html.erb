@@ -1,0 +1,58 @@
+<%= stylesheet_link_tag "new", :media => "all" %>
+<h1>New Cocktail POST</h1>
+<h3>新規Cocktail投稿</h3>
+<%= form_for @tweet do |f| %>
+
+<div class="新規投稿">
+
+        <div class="fieldA">
+            <div class ="post1">
+            <%= f.label :写真を選択 %>
+            </div>
+            <div class ="post2">
+            <%= f.file_field :image %>
+            </div>
+        </div>    </>
+        
+        <p><div class="fieldB"></p>
+            <div class ="post3">
+            <%= f.label :Cocktail_Name %>
+            </div>
+            <div class ="post4">
+            <%= f.text_field :cocktail, :size => 50 %>
+            </div>
+        </div>
+
+        <p><div class="fieldC"></p>
+            <div class ="post5">
+            <%= f.label :ベースとなるお酒 %>
+            </div>
+            <div class ="post6">
+            <%= f.text_field :Base, :size => 50 %>
+            </div>
+        </div>
+
+        <p><div class="fieldD"></p>
+            <div class ="post7">
+            <%= f.label :キャプションを入力  %>
+            </div>
+            <div class ="post8">
+            <%= f.text_area :comment, :size => "50x2" %>
+            </div>
+        </div>
+
+        <p><div class="fieldE"></p>
+            <div class ="post9">
+            <%= f.label :タグ %>(半角スペースを使って複数付けてみましょう)
+            </div>
+            <div class ="post10">
+            <%= f.text_field :tag_list, value: @tweet.tag_list, :size=>50 %>
+            </div>
+        </div>
+</div>
+
+<p></p><div class="fieldF"></p>
+    <%= f.submit "シェアする",:size =>"50px" %>
+</div>
+<% end %>
+

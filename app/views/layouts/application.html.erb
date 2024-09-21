@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cocktailapplication</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/55ec9495de.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#>= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="bg_test">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <header>
+      <div class="見出し0">
+        <div class="見出し2">
+          Sip & Love
+        </div>
+        <div class="見出し">
+          Sip & Love
+        </div>
+      </div>
+
+        
+        
+        
+        <div class="見出し3">
+          <%= link_to "Home", tweets_path  %></li>
+        </div>
+            
+
+
+        <div class="登録">
+          <% if user_signed_in? %>
+            
+            <%= link_to 'My page', user_path(current_user.id) %></li>
+          <% else %>
+          
+          <%= link_to 'Login', new_user_session_path %></li>
+          <% end %>
+        </div>
+
+        <div class="hamburger-menu">
+          <input type="checkbox" id="menu-btn-check">
+          <label for="menu-btn-check" class="menu-btn"><span></span></label>
+        
+      
+
+        <div class="menu-content">
+          <ul>
+            <li><%= link_to "Top", root_path  %></li>
+            
+            <li><%= link_to "About", tweets_show_path %></li>
+
+            <li><%= link_to "New Post", tweets_new_path %></li>
+          </ul>
+      </div>
+
+    </div>
+
+    </header>
+      <%= yield %>
+
+    <footer>
+      <div class="footer-list">
+        <div class="last">
+          Sip&Love
+        </div>
+
+        <div class="last2">
+          オシャレな時間になれていれば幸いです
+        </div>
+      </div>
+    </footer>
+  </body>
+
+</html>

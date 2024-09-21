@@ -1,0 +1,365 @@
+<!DOCTYPE html> 
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+<body>
+<%= stylesheet_link_tag "top", :media => "all" %>
+<main>   
+<div class="slider">
+  <!-- slides -->
+  <div class="slider__slides">
+    <div class="slide s--active">
+      <div class="slide__inner">
+        <div class="slide__content">
+          <h2 class="slide__heading">Welcome to the colorful world!</h2>
+          <p class="slide__text">Greetings, everyone!</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide__inner">
+        <div class="slide__content">
+          <h2 class="slide__heading">Stylish Space</h2>
+          <p class="slide__text">Take up a new hobby</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide__inner">
+        <div class="slide__content">
+          <h2 class="slide__heading">Enjoy with color</h2>
+          <p class="slide__text">It's like fireworks</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide__inner">
+        <div class="slide__content">
+          <h2 class="slide__heading">Cocktails aren't just about taste!</h2>
+          <p class="slide__text">Also uses salt, fruits, and flowers.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide s--prev">
+      <div class="slide__inner">
+        <div class="slide__content">
+          <h2 class="slide__heading">It's truly an art.</h2>
+          <p class="slide__text">Let's make a wonderful time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- slides end -->
+  <div class="slider__control">
+    <div class="slider__control-line"></div>
+    <div class="slider__control-line"></div>
+  </div>
+  <div class="slider__control slider__control--right m--right">
+    <div class="slider__control-line"></div>
+    <div class="slider__control-line"></div>
+  </div>
+</div>
+</main>
+
+<script>
+    (function() {
+    var $slides = document.querySelectorAll('.slide');
+    var $controls = document.querySelectorAll('.slider__control');
+    var numOfSlides = $slides.length;
+    var slidingAT = 1300; // sync this with scss variable
+    var slidingBlocked = false;
+  
+    [].slice.call($slides).forEach(function($el, index) {
+      var i = index + 1;
+      $el.classList.add('slide-' + i);
+      $el.dataset.slide = i;
+    });
+  
+    [].slice.call($controls).forEach(function($el) {
+      $el.addEventListener('click', controlClickHandler);
+    });
+  
+    function controlClickHandler() {
+      if (slidingBlocked) return;
+      slidingBlocked = true;
+  
+      var $control = this;
+      var isRight = $control.classList.contains('m--right');
+      var $curActive = document.querySelector('.slide.s--active');
+      var index = +$curActive.dataset.slide;
+      (isRight) ? index++ : index--;
+      if (index < 1) index = numOfSlides;
+      if (index > numOfSlides) index = 1;
+      var $newActive = document.querySelector('.slide-' + index);
+  
+      $control.classList.add('a--rotation');
+      $curActive.classList.remove('s--active', 's--active-prev');
+      document.querySelector('.slide.s--prev').classList.remove('s--prev');
+      
+      $newActive.classList.add('s--active');
+      if (!isRight) $newActive.classList.add('s--active-prev');
+      
+  
+      var prevIndex = index - 1;
+      if (prevIndex < 1) prevIndex = numOfSlides;
+  
+      document.querySelector('.slide-' + prevIndex).classList.add('s--prev');
+  
+      setTimeout(function() {
+        $control.classList.remove('a--rotation');
+        slidingBlocked = false;
+      }, slidingAT*0.75);
+    };
+  }());
+</script>
+
+
+<div id="container">
+  <div class="item1">
+      <div class="box1">
+          <div class="text1">
+          カクテルとは…
+          </div>
+      </div>
+      <div class="box2">
+        <%= image_tag "about3.jpg", size: '100x200', class: 'osake1' %>
+      </div>
+  </div>
+
+
+  <div class="item2">
+      <div class="box3">
+        <%= image_tag "about2.jpg" , class: 'osake2'%>
+      </div>
+
+      <div class="box4">
+        <%= image_tag "about1.jpg" , class: 'osake3'%>
+      </div>
+
+      <div class="box5">
+        <div class="text2">
+          ベースとなるお酒に複数の別のお酒や果汁、シロップなどを加え、
+          <p>混ぜて作るドリンクです。</p>
+        </div>
+      </div>
+
+      <div class="box6">
+        <%= image_tag "about7.jpg" , class: 'osake4'%>
+      </div>
+  </div>
+
+  <div class="item3">
+      <div class="box7">
+        <div class="text3">
+          カクテルの歴史は諸説あるが、古代ローマ、古代ギリシャ、古代エジプトの時代まで遡ります。
+        </div>
+      </div>
+
+      <div class="box8">
+        <%= image_tag "about8.jpg" ,  class: 'osake5'%>
+      </div>
+
+      <div class="box9">
+        <div class="text3a">
+          当時ワインやビールがあったが、品質が落ちるのを防ぐ、また劣化・酸化を防ぐために「何かを混ぜて飲んでいた」のがカクテルのスタートと言われています。
+        </div>
+      </div>
+  </div>
+
+
+  <div class="item4">
+      <div class="box10">
+        <%= image_tag "about4.jpeg" ,  class: 'osake6'%>
+      </div>
+
+      <div class="box11">
+        <div class="text4">
+          世界1古いカクテルは「サゼラック」と言われています。
+          ウイスキー、アブサン、ビダーズ、砂糖をブレンドしたものです。
+        </div>
+      </div>
+
+      <div class="box12">
+        <%= image_tag "about10.jpg" ,  class: 'osake7'%>
+      </div>
+  </div>
+
+
+  <div class="item5">
+      <div class="box13">
+        <%= image_tag "about6.jpg" ,  class: 'osake8'%>
+      </div>
+
+      <div class="box14">
+        <%= image_tag "about5.jpg" ,  class: 'osake9'%>
+      </div>
+
+      <div class="box15">
+        <div class="text5">
+          また、カクテルの最高度数は「スピリタス」という世界最高のアルコール度数96度が有名です…知らずに飲むと危ないですよね
+        </div>
+      </div>
+  </div>
+
+  </div>
+  <div class="item6">
+    <div class="text6">
+      自分のお気に入りをここで見つけてみてください。
+    </div>
+  </div>
+
+
+  <div id="container2">
+    <div class= "item7">
+      <div class= "text7">
+        ベースとなるお酒
+      </div>
+    </div>
+
+    <div class= "item7A">
+      画像をクリックして見てみましょう
+    </div>
+
+    <div class="baseosake1">
+      <div class= "item8">
+        <div class="box16">
+          <div class= "text8">
+              ジン-Gin
+          </div>
+        </div>
+
+          <div class="box17">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0004.html" do %>
+            <%= image_tag 'base1.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseA" %>
+            <% end %>
+          </div>
+      </div>
+
+      <div class= "item9">
+        <div class="box18">
+          <div class= "text9">
+              ウォッカ-Vodka
+          </div>
+        </div>
+
+          <div class="box19">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0002.html" do %>
+            <%= image_tag 'base2.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseB" %>
+            <% end %>
+          </div>
+      </div>
+
+      <div class= "item10">
+        <div class="box20">
+          <div class= "text10">
+              テキーラ-Tequila
+          </div>
+        </div>
+
+          <div class="box21">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0006.html" do %>
+            <%= image_tag 'base3.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseC" %>
+            <% end %>
+          </div>
+      </div>
+
+    </div>
+
+    <div class="baseosake2">
+      <div class= "item11">
+          <div class="box22">
+            <div class= "text11">
+              ラム-Rum
+          </div>
+        </div>
+
+        <div class="box23">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0009.html" do %>
+            <%= image_tag 'base4.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseD" %>
+            <% end %>
+        </div>
+      </div>
+
+
+      <div class= "item12">
+          <div class="box24">
+            <div class= "text12">
+              ウイスキー-Whiskey
+          </div>
+        </div>
+
+        <div class="box25">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0001.html" do %>
+            <%= image_tag 'base5.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseE" %>
+            <% end %>
+        </div>
+      </div>
+
+
+      <div class= "item13">
+          <div class="box26">
+            <div class= "text13">
+                ブランデー-Brandy
+          </div>
+        </div>
+
+        <div class="box27">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0008.html" do %>
+            <%= image_tag 'base6.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseF" %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="baseosake3">
+      <div class= "item14">
+          <div class="box28">
+            <div class= "text14">
+              リキュール-Liqueur
+          </div>
+        </div>
+
+        <div class="box29">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0010.html" do %>
+            <%= image_tag 'base7.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseG" %>
+            <% end %>
+        </div>
+      </div>
+
+
+      <div class= "item15">
+          <div class="box30">
+            <div class= "text15">
+              シャンパン-Champagne
+          </div>
+        </div>
+
+        <div class="box31">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0003.html" do %>
+            <%= image_tag 'base8.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseH" %>
+            <% end %>
+        </div>
+      </div>
+
+
+      <div class= "item16">
+          <div class="box32">
+            <div class= "text16">
+                ワイン-Wine
+          </div>
+        </div>
+
+        <div class="box33">
+            <%= link_to "http://www.cocktailtype.com/sp/cocktail/cocktail_base_0011.html" do %>
+            <%= image_tag 'base9.jpg', width: 300, height: 300, crop: "fill", quality: "auto", fetch_format: "auto", class:"baseI" %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
